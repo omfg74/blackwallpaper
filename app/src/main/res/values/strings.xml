@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">blackwallpaper</string>
+    <string name="female">ms.</string>
+    <string name="male">mr.</string>
+    <string name="sex">sex</string>
+    <string name="name">Name</string>
+    <string name="surname">surmane</string>
 </resources>
