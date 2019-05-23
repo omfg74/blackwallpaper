@@ -6,24 +6,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.blackwallpaper.interfaces.contract.MainActivityContract;
 import com.example.blackwallpaper.interfaces.contract.MainFragmentyContract;
+import com.example.blackwallpaper.presenter.MainActivityPresenter;
 import com.example.blackwallpaper.presenter.MainFragmentPresenter;
 import com.example.blackwallpaper.R;
 import com.example.blackwallpaper.model.LayoutModel;
 import com.example.blackwallpaper.view.adapters.MainRecyclerViewAdapter;
+import com.example.blackwallpaper.view.fragments.MainFragment;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MainFragmentyContract.View {
+public class MainActivity extends AppCompatActivity implements MainActivityContract.View {
 
-    RecyclerView recyclerView;
-    MainRecyclerViewAdapter adapter;
-    MainFragmentyContract.Presenter presenter;
+
+    MainActivityContract.Presenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter = new MainFragmentPresenter(this);
+        presenter = new MainActivityPresenter(this);
         presenter.onCreate();
 
 
@@ -31,15 +33,11 @@ public class MainActivity extends AppCompatActivity implements MainFragmentyCont
 
 
     @Override
-    public void initRecyclerView() {
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    public void changeFragment() {
+        MainFragment mainFragment = new MainFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainfragmentPlace,mainFragment)
+                .commit();
     }
-
-    @Override
-    public void fillRecyclerView(List<LayoutModel> layoutModels) {
-        adapter = new MainRecyclerViewAdapter(layoutModels);
-        recyclerView.setAdapter(adapter);
-    }
-
 }

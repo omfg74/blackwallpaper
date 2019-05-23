@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.blackwallpaper.R;
 import com.example.blackwallpaper.ServiceApplication;
+import com.example.blackwallpaper.interfaces.CallFromAdapterInterface;
 import com.example.blackwallpaper.model.LayoutModel;
 
 import java.util.List;
@@ -32,22 +33,18 @@ import static com.example.blackwallpaper.model.LayoutModel.YEAR_TYPE;
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     List<LayoutModel>list;
-
-
-
-    public MainRecyclerViewAdapter(List<LayoutModel>list) {
+    CallFromAdapterInterface callFromAdapterInterface;
+    public MainRecyclerViewAdapter(List<LayoutModel>list, CallFromAdapterInterface callFromAdapterInterface) {
         this.list = list;
+        this.callFromAdapterInterface = callFromAdapterInterface;
     }
-
     @Override
     public int getItemViewType(int position) {
         LayoutModel layoutModel = list.get(position);
         if(layoutModel !=null){
          return    layoutModel.getType();
         }
-
 return 0;
-        //        return super.getItemViewType(position);
     }
 
     @NonNull
@@ -93,7 +90,7 @@ return 0;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
         LayoutModel layoutModel = list.get(position);
         switch (layoutModel.getType()){
@@ -138,18 +135,42 @@ return 0;
             case YEAR_TYPE:
                 ((YearViewHolder)holder).yearTitleTextView.setText("Year");
                 ((YearViewHolder)holder).yearDataTextView.setText("Choose year");
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        callFromAdapterInterface.onItemClicked(position);
+                    }
+                });
                 break;
             case DEALER_TYPE:
                 ((DealerHolder)holder).dealerTitleTextView.setText("Deler");
                 ((DealerHolder)holder).dealerDataTextView.setText("Choose dealer");
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        callFromAdapterInterface.onItemClicked(position);
+                    }
+                });
                 break;
             case CITY_TYPE:
                 ((CityHolder)holder).cityTitleTextView.setText("City");
                 ((CityHolder)holder).cityDataTextView.setText("Choose your city");
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        callFromAdapterInterface.onItemClicked(position);
+                    }
+                });
                 break;
             case CLASS_TYPE:
                 ((ClassViewHolder)holder).classTitleTextView.setText("Class");
                 ((ClassViewHolder)holder).classDatatextView.setText("Choose class");
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        callFromAdapterInterface.onItemClicked(position);
+                    }
+                });
                 break;
         }
     }

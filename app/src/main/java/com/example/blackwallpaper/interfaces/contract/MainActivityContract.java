@@ -1,7 +1,13 @@
 package com.example.blackwallpaper.interfaces.contract;
 
 public interface MainActivityContract {
-    interface View{}
-    interface Presenter{}
-    interface Model{}
+    interface View{
+        void changeFragment();
+    }
+    interface Presenter{
+        void onCreate();
+    }
+    interface Model{
+
+    }
 }
