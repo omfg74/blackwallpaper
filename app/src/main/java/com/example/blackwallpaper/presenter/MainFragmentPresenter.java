@@ -2,6 +2,8 @@ package com.example.blackwallpaper.presenter;
 
 import android.util.Log;
 
+import com.example.blackwallpaper.R;
+import com.example.blackwallpaper.ServiceApplication;
 import com.example.blackwallpaper.model.reposytory.ModelProvider;
 import com.example.blackwallpaper.interfaces.contract.MainFragmentyContract;
 import com.example.blackwallpaper.model.LayoutModel;
@@ -33,4 +35,26 @@ public class MainFragmentPresenter implements MainFragmentyContract.Presenter {
         Log.d("Log ",""+layoutModels.size());
         view.fillRecyclerView(layoutModels);
     }
+
+    @Override
+    public void onReciclerViewItemClicked(int i, String s) {
+        Log.d("Log ","number " +i);
+        switch (i){
+            case 7:
+                view.attachCityFragment();
+                break;
+            case 8:
+                if(s.equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.choose_your_city_title))){
+                    view.makeToast("Please select city first");
+                }else {
+                    view.attachDealerFragment();
+                }
+                break;
+            case 9:
+                view.attachYearFragment();
+                break;
+        }
+
+    }
+
 }

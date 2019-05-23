@@ -8,6 +8,10 @@ public interface MainFragmentyContract {
     interface View{
         void initRecyclerView();
         void fillRecyclerView(List<LayoutModel>layoutModels);
+        void attachCityFragment();
+        void attachDealerFragment();
+        void attachYearFragment();
+        void makeToast(String s);
     }
     interface Model{
         List<LayoutModel>laoutmodels();
@@ -15,6 +19,7 @@ public interface MainFragmentyContract {
     interface Presenter{
         void onCreate();
         void provideDataSet();
+        void onReciclerViewItemClicked(int i, String s);
 
 
     }

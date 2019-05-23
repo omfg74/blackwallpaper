@@ -138,37 +138,37 @@ return 0;
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        callFromAdapterInterface.onItemClicked(position);
+                        callFromAdapterInterface.onItemClicked(position,((YearViewHolder) holder).yearDataTextView.getText().toString());
                     }
                 });
                 break;
             case DEALER_TYPE:
                 ((DealerHolder)holder).dealerTitleTextView.setText("Deler");
-                ((DealerHolder)holder).dealerDataTextView.setText("Choose dealer");
+                ((DealerHolder)holder).dealerDataTextView.setText(ServiceApplication.getContext().getString(R.string.choose_your_dealer_title));
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        callFromAdapterInterface.onItemClicked(position);
+                        callFromAdapterInterface.onItemClicked(position, null);
                     }
                 });
                 break;
             case CITY_TYPE:
                 ((CityHolder)holder).cityTitleTextView.setText("City");
-                ((CityHolder)holder).cityDataTextView.setText("Choose your city");
+                ((CityHolder)holder).cityDataTextView.setText(ServiceApplication.getContext().getString(R.string.choose_your_city_title));
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        callFromAdapterInterface.onItemClicked(position);
+                        callFromAdapterInterface.onItemClicked(position, null);
                     }
                 });
                 break;
             case CLASS_TYPE:
                 ((ClassViewHolder)holder).classTitleTextView.setText("Class");
-                ((ClassViewHolder)holder).classDatatextView.setText("Choose class");
+                ((ClassViewHolder)holder).classDatatextView.setText(ServiceApplication.getContext().getString(R.string.choose_class));
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        callFromAdapterInterface.onItemClicked(position);
+                        callFromAdapterInterface.onItemClicked(position, null);
                     }
                 });
                 break;

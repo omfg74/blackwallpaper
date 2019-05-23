@@ -18,6 +18,7 @@ import com.example.blackwallpaper.interfaces.contract.MainFragmentyContract;
 import com.example.blackwallpaper.model.LayoutModel;
 import com.example.blackwallpaper.presenter.MainFragmentPresenter;
 import com.example.blackwallpaper.view.adapters.MainRecyclerViewAdapter;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     RecyclerView recyclerView;
     MainRecyclerViewAdapter adapter;
     MainFragmentyContract.Presenter presenter;
+    View view;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +37,8 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment,container,false);
+        view =inflater.inflate(R.layout.main_fragment,container,false);
+        return view;
     }
 
     @Override
@@ -56,7 +59,27 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     }
 
     @Override
-    public void onItemClicked(int s) {
-        Log.d("Log", "on item clicked "+s);
+    public void attachCityFragment() {
+
+    }
+
+    @Override
+    public void attachDealerFragment() {
+
+    }
+
+    @Override
+    public void attachYearFragment() {
+
+    }
+
+    @Override
+    public void makeToast(String s) {
+        Snackbar.make(view,s,Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onItemClicked(int i, String s) {
+        presenter.onReciclerViewItemClicked(i,s);
     }
 }

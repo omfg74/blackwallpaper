@@ -11,4 +11,7 @@
     <string name="fname">Second name</string>
     <string name="telephone">Телефон</string>
     <string name="enter_your_phone_number">Введите ваш телефон</string>
+    <string name="choose_your_city_title">Choose your city</string>
+    <string name="choose_your_dealer_title">Choose class</string>
+    <string name="choose_class">Choose class</string>
 </resources>
