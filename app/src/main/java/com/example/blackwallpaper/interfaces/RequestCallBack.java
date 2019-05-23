@@ -1,5 +1,7 @@
 package com.example.blackwallpaper.interfaces;
 
-public interface RequestCallBack {
-    void callback();
+import java.util.List;
+
+public interface RequestCallBack<T> {
+    void callback(List<T >list);
 }

@@ -11,6 +11,7 @@ public interface MainFragmentyContract {
         void attachCityFragment();
         void attachDealerFragment();
         void attachYearFragment();
+        void attachClassFragment();
         void makeToast(String s);
     }
     interface Model{

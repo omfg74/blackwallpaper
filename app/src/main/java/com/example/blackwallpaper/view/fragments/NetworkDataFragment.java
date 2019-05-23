@@ -9,10 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class NetworkDataFragment extends Fragment {
+import com.example.blackwallpaper.interfaces.contract.NetworkdataFragmentContract;
+import com.example.blackwallpaper.presenter.NetworkdataFragmentPresenter;
+
+public class NetworkDataFragment extends Fragment implements NetworkdataFragmentContract.Viev {
+
+    NetworkdataFragmentContract.Presenter presenter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new NetworkdataFragmentPresenter(this);
+        presenter.onCreate(getArguments());
     }
 
     @Nullable
@@ -24,5 +32,10 @@ public class NetworkDataFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void placeItamsTorecyclerView() {
+
     }
 }

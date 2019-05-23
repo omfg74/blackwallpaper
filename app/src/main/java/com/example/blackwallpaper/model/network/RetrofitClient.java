@@ -27,9 +27,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit = null;
     private static OkHttpClient okHttpClient;
-
-
-    public static Retrofit getInstance() {
+    private  RetrofitInterface retrofitInterface;
+    public RetrofitInterface getRetrofitInterface() {
+        return retrofitInterface;
+    }
+    public static  Retrofit getInstance() {
         if (okHttpClient == null) {
             okHttpClient = getOkhttp();
         }
@@ -49,6 +51,7 @@ public class RetrofitClient {
     protected static OkHttpClient getOkhttp() {
         OkHttpClient okhttpClient = new OkHttpClient().newBuilder()
                 .addInterceptor(addInterceptor())
+                .authenticator(addAuthenticator())
                 .build();
 
         return okhttpClient;
@@ -59,7 +62,7 @@ public class RetrofitClient {
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return httpLoggingInterceptor;
     }
-    private  Authenticator addAuthenticator(){
+    private static Authenticator addAuthenticator(){
         return new Authenticator() {
             @Nullable
             @Override
@@ -89,6 +92,8 @@ public class RetrofitClient {
                 if (accessToken!=null) {
                     return response.request().newBuilder()
                             .header("Authorization",accessToken)
+                            .header()
+                            .header()
                             .build();
                 }else
                     return null;
@@ -96,7 +101,7 @@ public class RetrofitClient {
         };
     }
 
-    private Retrofit getAdapterAuth() {
+    private static Retrofit getAdapterAuth() {
         Retrofit retrofit;
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(addInterceptor());

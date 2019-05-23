@@ -5,6 +5,8 @@ import com.example.blackwallpaper.model.CarClass;
 import com.example.blackwallpaper.model.City;
 import com.example.blackwallpaper.model.ShowRoom;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -22,11 +24,11 @@ public interface RetrofitInterface {
                               @Field("grant_type") String q,
                               @Field("scope") String scope);
     @GET("Classes")
-    Call<CarClass> getClasses();
+    Call<List<CarClass>> getClasses();
 
     @GET("cities")
-    Call<City> getCities();
+    Call<List<City>> getCities();
 
     @GET("showrooms")
-    Call<ShowRoom> getShorooms(@Query("cityid") String cityId);
+    Call<List<ShowRoom>> getShorooms(@Query("cityid") int cityId);
 }

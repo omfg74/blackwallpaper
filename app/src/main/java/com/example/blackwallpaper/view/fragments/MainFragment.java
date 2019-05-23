@@ -60,17 +60,23 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
 
     @Override
     public void attachCityFragment() {
-
+       changeFragment("city");
     }
+
 
     @Override
     public void attachDealerFragment() {
-
+        changeFragment("dealer");
     }
 
     @Override
     public void attachYearFragment() {
+        changeFragment("year");
+    }
 
+    @Override
+    public void attachClassFragment() {
+        changeFragment("class");
     }
 
     @Override
@@ -82,4 +88,16 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     public void onItemClicked(int i, String s) {
         presenter.onReciclerViewItemClicked(i,s);
     }
+    private void changeFragment(String type) {
+        Bundle bundle = new Bundle();
+        bundle.putString("type",type);
+        NetworkDataFragment networkDataFragment = new NetworkDataFragment();
+        networkDataFragment.setArguments(bundle);
+        networkDataFragment.setTargetFragment(this,111);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainfragmentPlace,networkDataFragment)
+                .commit();
+    }
+
 }
