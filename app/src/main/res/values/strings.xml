@@ -5,4 +5,10 @@
     <string name="sex">sex</string>
     <string name="name">Name</string>
     <string name="surname">surmane</string>
+    <string name="text_field_enter_your_surname">Введите вашу фамилию</string>
+    <string name="text_field_enter_your_name">Введите ваше имя</string>
+    <string name="text_field_enter_your_fname">Enter your second name</string>
+    <string name="fname">Second name</string>
+    <string name="telephone">Телефон</string>
+    <string name="enter_your_phone_number">Введите ваш телефон</string>
 </resources>

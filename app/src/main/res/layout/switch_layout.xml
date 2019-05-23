@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:textSize="24dp"
+        android:textSize="22dp"
         android:id="@+id/switchTextView"
         android:layout_width="133dp"
         android:layout_height="33dp"

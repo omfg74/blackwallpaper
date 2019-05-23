@@ -1,4 +1,4 @@
-package com.example.blackwallpaper;
+package com.example.blackwallpaper.model;
 
 public class LayoutModel {
     private String title;

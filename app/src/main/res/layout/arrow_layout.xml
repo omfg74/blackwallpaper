@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <TextView
+        android:textSize="22dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/arrowTitleTextView"
+        android:text="@string/name"
+        android:gravity="left"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginLeft="10dp"
+        />
+    <TextView
+        android:textSize="22dp"
+        android:id="@+id/arrowDatatextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+
+        />
+
+    <ImageView
+        android:id="@+id/arrowImageview"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="10dp"
+        android:visibility="visible"
+        app:srcCompat="@drawable/arrow"
+        tools:srcCompat="@drawable/arrow" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
