@@ -5,6 +5,7 @@ import android.provider.SyncStateContract;
 import androidx.annotation.Nullable;
 
 import com.example.blackwallpaper.BuildConfig;
+import com.example.blackwallpaper.Logger;
 import com.example.blackwallpaper.interfaces.RetrofitInterface;
 import com.example.blackwallpaper.model.AuthObject;
 import com.example.blackwallpaper.model.Constants;
@@ -59,6 +60,7 @@ public class RetrofitClient {
 
     private static Interceptor addInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return httpLoggingInterceptor;
     }
@@ -69,31 +71,30 @@ public class RetrofitClient {
             public Request authenticate(@Nullable Route route, Response response) {
                 String accessToken = null;
                 if(response.code()==200){
-
+                    Logger.toLog("code "+response.code());
+                    return null;
                 }
                 if(response.code()==201){
-
+                    Logger.toLog("code "+response.code());
+                    return null;
                 }
-                if(response.code()==401||response.code()==400){
-                    if(response.headers().get("Unauthorized").equalsIgnoreCase("key_expired")){
+                if(response.code()==401|response.code()==400){
+                    Logger.toLog("code "+response.code());
                         RetrofitInterface retrofitInterface = getAdapterAuth().create(RetrofitInterface.class);
                         try {
-                            retrofit2.Response<String> requeest = retrofitInterface.getAuthToken("Basic Q3VzdG9tR3JhbnRUeXBlQ2xpZW50SWQ6Q3VzdG9tR3JhbnRUeXBlQ2xpZW50U2VjcmV0","custom_client_credentials","profile").execute();
+                            retrofit2.Response<AuthObject> requeest = retrofitInterface.getAuthToken("Basic Q3VzdG9tR3JhbnRUeXBlQ2xpZW50SWQ6Q3VzdG9tR3JhbnRUeXBlQ2xpZW50U2VjcmV0","custom_client_credentials","profile").execute();
                             if(requeest.headers()!=null){
-                               accessToken = requeest.headers().get("access_token");
+                               accessToken = requeest.body().getAccessToken();
                             }
                         }catch (Exception e){
                             e.printStackTrace();
                         }
-                    }else {
-                        return null;
-                    }
                 }
                 if (accessToken!=null) {
                     return response.request().newBuilder()
-                            .header("Authorization",accessToken)
-                            .header()
-                            .header()
+                            .header("Authorization","Bearer "+accessToken)
+                            .header("Content-Type","application/json")
+                            .header("Accept","application/json")
                             .build();
                 }else
                     return null;

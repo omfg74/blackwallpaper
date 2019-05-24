@@ -2,9 +2,11 @@ package com.example.blackwallpaper.interfaces.contract;
 
 import android.os.Bundle;
 
+import java.util.List;
+
 public interface NetworkdataFragmentContract {
     interface Viev{
-        void placeItamsTorecyclerView();
+        void placeItamsTorecyclerView(List list, String type);
     }
     interface Model{}
     interface Presenter{

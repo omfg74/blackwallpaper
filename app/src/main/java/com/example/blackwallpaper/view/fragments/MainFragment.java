@@ -1,5 +1,6 @@
 package com.example.blackwallpaper.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new MainFragmentPresenter(this);
+        presenter.onCreate();
     }
 
     @Nullable
@@ -45,7 +47,8 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerView);
-        presenter.onCreate();
+        presenter.onViewCreated();
+
     }
     @Override
     public void initRecyclerView() {
@@ -96,8 +99,17 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
         networkDataFragment.setTargetFragment(this,111);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
+                .addToBackStack("networkFragment")
                 .replace(R.id.mainfragmentPlace,networkDataFragment)
                 .commit();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 111:
+            presenter.onActivityResult(data);
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.blackwallpaper.interfaces.contract;
 
+import android.content.Intent;
+
 import com.example.blackwallpaper.model.LayoutModel;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public interface MainFragmentyContract {
         void onCreate();
         void provideDataSet();
         void onReciclerViewItemClicked(int i, String s);
-
-
+        void onViewCreated();
+        void onActivityResult(Intent data);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.blackwallpaper.presenter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.example.blackwallpaper.R;
@@ -22,8 +24,7 @@ public class MainFragmentPresenter implements MainFragmentyContract.Presenter {
     @Override
     public void onCreate() {
         fillSampleDataSet();
-        view.initRecyclerView();
-        provideDataSet();
+
     }
 
     private void fillSampleDataSet() {
@@ -32,13 +33,13 @@ public class MainFragmentPresenter implements MainFragmentyContract.Presenter {
 
     @Override
     public void provideDataSet() {
-        Log.d("Log ",""+layoutModels.size());
+        Log.d("Log ","Model size"+layoutModels.size());
         view.fillRecyclerView(layoutModels);
     }
 
     @Override
     public void onReciclerViewItemClicked(int i, String s) {
-        Log.d("Log ","number " +i);
+        Log.d("Log ","number " +i+" "+s);
         switch (i){
             case 7:
                 view.attachCityFragment();
@@ -53,8 +54,25 @@ public class MainFragmentPresenter implements MainFragmentyContract.Presenter {
             case 9:
                 view.attachYearFragment();
                 break;
+            case 10:
+                view.attachClassFragment();
+                break;
         }
 
+    }
+
+    @Override
+    public void onViewCreated() {
+        view.initRecyclerView();
+        provideDataSet();
+    }
+
+    @Override
+    public void onActivityResult(Intent data) {
+        Bundle bundle= data.getExtras();
+        String name  = bundle.getString("name");
+        int id =  bundle.getInt("id");
+        Log.d("Log", name+id);
     }
 
 }

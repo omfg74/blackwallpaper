@@ -2,10 +2,8 @@ package com.example.blackwallpaper.model.network;
 
 import com.example.blackwallpaper.interfaces.RequestCallBack;
 import com.example.blackwallpaper.interfaces.RetrofitInterface;
-import com.example.blackwallpaper.model.BaseRequest;
 import com.example.blackwallpaper.model.City;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -13,9 +11,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CityRequest extends BaseRequest {
+    RequestCallBack requestCallBack;
     public CityRequest(RequestCallBack callBack) {
-        super(callBack);
-//        super.makeCallback(new ArrayList());
+        this.requestCallBack = callBack;
     }
     @Override
     public void makeRequest() {
@@ -25,7 +23,7 @@ public class CityRequest extends BaseRequest {
             call.enqueue(new Callback<List<City>>() {
                 @Override
                 public void onResponse(Call<List<City>> call, Response<List<City>> response) {
-                    makeCallback(response.body());
+                    makeCallback(response.body(), requestCallBack);
                 }
 
                 @Override
@@ -37,14 +35,9 @@ public class CityRequest extends BaseRequest {
             e.printStackTrace();
         }
     }
-
-//    void getcarClasses(){
-//        requestCallBack.callback();
-//    }
-
     @Override
-    public void makeCallback(List list) {
-        super.makeCallback(list);
+    public void makeCallback(List list, RequestCallBack requestCallBack) {
+        super.makeCallback(list,requestCallBack);
 
     }
 

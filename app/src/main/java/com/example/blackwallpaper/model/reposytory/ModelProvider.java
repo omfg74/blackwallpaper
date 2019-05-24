@@ -9,7 +9,6 @@ import java.util.List;
 public class ModelProvider implements MainFragmentyContract.Model{
     List<LayoutModel> layoutModels = new ArrayList<>();
     private void dataSet(){
-
         layoutModels.add(new LayoutModel("switch",1));
         layoutModels.add(new LayoutModel("Surname",4));
         layoutModels.add(new LayoutModel("name",2));
@@ -19,7 +18,8 @@ public class ModelProvider implements MainFragmentyContract.Model{
         layoutModels.add(new LayoutModel("VIN",7));
         layoutModels.add(new LayoutModel("City",8));
         layoutModels.add(new LayoutModel("Dealer",9));
-        layoutModels.add(new LayoutModel("Class ",10));
+        layoutModels.add(new LayoutModel("Year",10));
+        layoutModels.add(new LayoutModel("Class ",11));
     }
 
     @Override
