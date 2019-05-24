@@ -3,7 +3,9 @@ package com.example.blackwallpaper.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ShowRoom {
+import java.io.Serializable;
+
+public class ShowRoom   implements Serializable {
 
     @SerializedName("Id")
     @Expose

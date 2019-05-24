@@ -16,7 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.blackwallpaper.R;
 import com.example.blackwallpaper.interfaces.CallFromAdapterInterface;
 import com.example.blackwallpaper.interfaces.contract.MainFragmentyContract;
+import com.example.blackwallpaper.model.CarClass;
+import com.example.blackwallpaper.model.City;
 import com.example.blackwallpaper.model.LayoutModel;
+import com.example.blackwallpaper.model.ShowRoom;
 import com.example.blackwallpaper.presenter.MainFragmentPresenter;
 import com.example.blackwallpaper.view.adapters.MainRecyclerViewAdapter;
 import com.google.android.material.snackbar.Snackbar;
@@ -85,6 +88,26 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     @Override
     public void makeToast(String s) {
         Snackbar.make(view,s,Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setCityText(City city) {
+        adapter.setCity(city);
+    }
+
+    @Override
+    public void setDealerText(ShowRoom showRoom) {
+        adapter.setDealer(showRoom);
+    }
+
+    @Override
+    public void setYearText(int year) {
+        adapter.setYear(year);
+    }
+
+    @Override
+    public void setClassText(CarClass carClass) {
+        adapter.setClass(carClass);
     }
 
     @Override

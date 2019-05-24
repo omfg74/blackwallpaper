@@ -1,5 +1,7 @@
 package com.example.blackwallpaper;
 
-public interface FromNetworkCallBack {
-    void callBack(int i, String s);
+import com.example.blackwallpaper.model.BaseNetworkObject;
+
+public interface FromNetworkCallBack<T> {
+    void callBack(T baseNetworkObject, String type);
 }

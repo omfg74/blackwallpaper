@@ -23,7 +23,7 @@ public class ModelProvider implements MainFragmentyContract.Model{
     }
 
     @Override
-    public List<LayoutModel> laoutmodels() {
+    public List<LayoutModel> laoytmodels() {
         dataSet();
         return layoutModels;
     }

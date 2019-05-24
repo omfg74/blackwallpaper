@@ -2,7 +2,10 @@ package com.example.blackwallpaper.interfaces.contract;
 
 import android.content.Intent;
 
+import com.example.blackwallpaper.model.CarClass;
+import com.example.blackwallpaper.model.City;
 import com.example.blackwallpaper.model.LayoutModel;
+import com.example.blackwallpaper.model.ShowRoom;
 
 import java.util.List;
 
@@ -15,9 +18,13 @@ public interface MainFragmentyContract {
         void attachYearFragment();
         void attachClassFragment();
         void makeToast(String s);
+        void setCityText(City city);
+        void setDealerText(ShowRoom showRoom);
+        void setYearText(int year);
+        void setClassText(CarClass carClass);
     }
     interface Model{
-        List<LayoutModel>laoutmodels();
+        List<LayoutModel> laoytmodels();
     }
     interface Presenter{
         void onCreate();

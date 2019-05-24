@@ -6,6 +6,9 @@ import android.util.Log;
 
 import com.example.blackwallpaper.R;
 import com.example.blackwallpaper.ServiceApplication;
+import com.example.blackwallpaper.model.CarClass;
+import com.example.blackwallpaper.model.City;
+import com.example.blackwallpaper.model.ShowRoom;
 import com.example.blackwallpaper.model.reposytory.ModelProvider;
 import com.example.blackwallpaper.interfaces.contract.MainFragmentyContract;
 import com.example.blackwallpaper.model.LayoutModel;
@@ -28,7 +31,7 @@ public class MainFragmentPresenter implements MainFragmentyContract.Presenter {
     }
 
     private void fillSampleDataSet() {
-        layoutModels=layoutProvider.laoutmodels();
+        layoutModels=layoutProvider.laoytmodels();
     }
 
     @Override
@@ -70,9 +73,21 @@ public class MainFragmentPresenter implements MainFragmentyContract.Presenter {
     @Override
     public void onActivityResult(Intent data) {
         Bundle bundle= data.getExtras();
-        String name  = bundle.getString("name");
-        int id =  bundle.getInt("id");
-        Log.d("Log", name+id);
+        String type= bundle.getString("type");
+        if(type.equalsIgnoreCase("city")){
+            City city = (City) bundle.getSerializable("object");
+            view.setCityText(city);
+        }else if(type.equalsIgnoreCase("dealer")){
+            ShowRoom showRoom = (ShowRoom)  bundle.getSerializable("object");
+            view.setDealerText(showRoom);
+        }else if(type.equalsIgnoreCase("year")){
+            int year = (int)  bundle.getSerializable("object");
+            view.setYearText(year);
+        }else if(type.equalsIgnoreCase("class")){
+            CarClass carClass = (CarClass)  bundle.getSerializable("object");
+            view.setClassText(carClass);
+        }
+
     }
 
 }

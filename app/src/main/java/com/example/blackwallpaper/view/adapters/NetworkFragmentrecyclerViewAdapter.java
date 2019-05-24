@@ -48,7 +48,10 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callFromAdapterInterface.callBack(cityList.get(position).getId(), cityList.get(position).getName());
+                    City city = new City();
+                    city.setId(cityList.get(position).getId());
+                    cityList.get(position).getName();
+                    callFromAdapterInterface.callBack(city, "city");
                 }
             });
 
@@ -57,7 +60,11 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callFromAdapterInterface.callBack(showRoomList.get(position).getId(), showRoomList.get(position).getName());
+                    ShowRoom showRoom = new ShowRoom();
+                    showRoom.setCityId(showRoomList.get(position).getCityId());
+                    showRoom.setId(showRoomList.get(position).getId());
+                    showRoom.setName(showRoomList.get(position).getName());
+                    callFromAdapterInterface.callBack(showRoom, "dealer");
                 }
             });
         }else if (yearList!=null){
@@ -66,7 +73,7 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callFromAdapterInterface.callBack(yearList.get(position),null);
+                    callFromAdapterInterface.callBack(yearList.get(position),"year");
                 }
             });
         }else if(carClassList!=null){
@@ -75,7 +82,10 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callFromAdapterInterface.callBack(carClassList.get(position).getId(), carClassList.get(position).getName());
+                    CarClass carClass = new CarClass();
+                    carClass.setId(carClassList.get(position).getId());
+                    carClass.setName(carClassList.get(position).getName());
+                    callFromAdapterInterface.callBack(carClass, "class");
                 }
             });
         }

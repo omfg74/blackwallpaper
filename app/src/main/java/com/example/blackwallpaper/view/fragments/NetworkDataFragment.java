@@ -15,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.blackwallpaper.FromNetworkCallBack;
 import com.example.blackwallpaper.Logger;
 import com.example.blackwallpaper.R;
-import com.example.blackwallpaper.interfaces.CallFromAdapterInterface;
 import com.example.blackwallpaper.interfaces.contract.NetworkdataFragmentContract;
+import com.example.blackwallpaper.model.CarClass;
 import com.example.blackwallpaper.model.City;
-import com.example.blackwallpaper.presenter.NetworkdataFragmentPresenter;
+import com.example.blackwallpaper.model.ShowRoom;
+import com.example.blackwallpaper.presenter.NetworkDataFragmentPresenter;
 import com.example.blackwallpaper.view.adapters.NetworkFragmentrecyclerViewAdapter;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 public class NetworkDataFragment extends Fragment implements NetworkdataFragmentContract.Viev, FromNetworkCallBack {
@@ -50,7 +51,7 @@ public class NetworkDataFragment extends Fragment implements NetworkdataFragment
         super.onViewCreated(view, savedInstanceState);
         netRecyclerView = view.findViewById(R.id.networkDatarecyclerView);
         netRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        presenter = new NetworkdataFragmentPresenter(this);
+        presenter = new NetworkDataFragmentPresenter(this);
         presenter.onCreate(getArguments());
     }
 
@@ -70,12 +71,13 @@ public class NetworkDataFragment extends Fragment implements NetworkdataFragment
         netRecyclerView.setAdapter(adapter);
     }
 
+
     @Override
-    public void callBack(int id, String name) {
+    public void callBack(Object baseNetworkObject, String type) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putInt("id", id);
-        bundle.putString("name", name);
+        bundle.putSerializable("object", (Serializable) baseNetworkObject);
+        bundle.putString("type",type);
         intent.putExtras(bundle);
         getTargetFragment().onActivityResult(111, 1, intent);
         getFragmentManager().popBackStack();

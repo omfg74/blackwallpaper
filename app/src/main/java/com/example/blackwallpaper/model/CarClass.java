@@ -4,7 +4,9 @@ package com.example.blackwallpaper.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CarClass {
+import java.io.Serializable;
+
+public class CarClass  implements Serializable {
 
     @SerializedName("Id")
     @Expose

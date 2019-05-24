@@ -12,11 +12,11 @@ import com.example.blackwallpaper.model.network.DealerRequest;
 
 import java.util.List;
 
-public class NetworkdataFragmentPresenter implements NetworkdataFragmentContract.Presenter, RequestCallBack {
+public class NetworkDataFragmentPresenter implements NetworkdataFragmentContract.Presenter, RequestCallBack {
     NetworkdataFragmentContract.Viev viev;
     NetworkdataFragmentContract.Model model;
     BaseRequest request;
-    public NetworkdataFragmentPresenter(NetworkdataFragmentContract.Viev viev) {
+    public NetworkDataFragmentPresenter(NetworkdataFragmentContract.Viev viev) {
         this.viev = viev;
     }
 
