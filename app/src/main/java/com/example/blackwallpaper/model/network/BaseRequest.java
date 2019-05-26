@@ -5,15 +5,19 @@ import com.example.blackwallpaper.interfaces.RequestCallBack;
 
 import java.util.List;
 
-public  abstract class BaseRequest<T> {
-    public void makeCallback(List<T>list, RequestCallBack requestCallBack){
+public abstract class BaseRequest<T> {
+    public void makeCallback(List<T> list, RequestCallBack requestCallBack) {
         try {
             Logger.toLog("List size in base request " + list.size());
             requestCallBack.callback(list);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public  void makeRequest(){}
-    public void makeRequest(int id){}
+
+    public void makeRequest() {
+    }
+
+    public void makeRequest(int id) {
+    }
 }

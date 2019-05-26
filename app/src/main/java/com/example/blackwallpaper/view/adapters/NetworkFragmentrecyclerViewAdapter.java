@@ -22,13 +22,14 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
     List<City> cityList;
     List<ShowRoom> showRoomList;
     List<Integer> yearList;
-    List<CarClass>carClassList;
+    List<CarClass> carClassList;
     View view;
     FromNetworkCallBack callFromAdapterInterface;
-    public NetworkFragmentrecyclerViewAdapter(FromNetworkCallBack callFromAdapterInterface, List<City> cityList, List<ShowRoom> showRooms,  List<Integer> yearList,  List<CarClass>carClasses ) {
+
+    public NetworkFragmentrecyclerViewAdapter(FromNetworkCallBack callFromAdapterInterface, List<City> cityList, List<ShowRoom> showRooms, List<Integer> yearList, List<CarClass> carClasses) {
         this.callFromAdapterInterface = callFromAdapterInterface;
         this.cityList = cityList;
-        this.yearList=  yearList;
+        this.yearList = yearList;
         this.carClassList = carClasses;
         this.showRoomList = showRooms;
     }
@@ -36,14 +37,14 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
     @NonNull
     @Override
     public NetworkFragmentrecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.network_data_item,parent,false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.network_data_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NetworkFragmentrecyclerViewAdapter.ViewHolder holder, final int position) {
-        if (cityList!=null){
-            Logger.toLog("fill test "+cityList.get(position).getName());
+        if (cityList != null) {
+            Logger.toLog("fill test " + cityList.get(position).getName());
             holder.textView.setText(cityList.get(position).getName());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -55,7 +56,7 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
                 }
             });
 
-        }else if (showRoomList!=null){
+        } else if (showRoomList != null) {
             holder.textView.setText(showRoomList.get(position).getName());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -67,19 +68,19 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
                     callFromAdapterInterface.callBack(showRoom, Constants.DEALER);
                 }
             });
-        }else if (yearList!=null){
-            Logger.toLog("year "+yearList.get(position));
+        } else if (yearList != null) {
+            Logger.toLog("year " + yearList.get(position));
             holder.textView.setText(String.valueOf(yearList.get(position)));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callFromAdapterInterface.callBack(yearList.get(position),Constants.YEAR);
+                    callFromAdapterInterface.callBack(yearList.get(position), Constants.YEAR);
                 }
             });
-        }else if(carClassList!=null){
-            Logger.toLog("Class "+carClassList.get(position).getName());
+        } else if (carClassList != null) {
+            Logger.toLog("Class " + carClassList.get(position).getName());
             holder.textView.setText(carClassList.get(position).getName());
-           holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     CarClass carClass = new CarClass();
@@ -93,20 +94,21 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
 
     @Override
     public int getItemCount() {
-        if (cityList!=null){
-        return cityList.size();
-        }else if (showRoomList!=null){
+        if (cityList != null) {
+            return cityList.size();
+        } else if (showRoomList != null) {
             return showRoomList.size();
-        }else if (yearList!=null){
+        } else if (yearList != null) {
             return yearList.size();
-        }else if(carClassList!=null){
+        } else if (carClassList != null) {
             return carClassList.size();
         }
-      return 0;
+        return 0;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.networkDataTextView);

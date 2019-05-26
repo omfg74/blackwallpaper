@@ -12,18 +12,20 @@ import retrofit2.Response;
 
 public class DealerRequest extends BaseRequest {
     RequestCallBack requestCallBack;
+
     public DealerRequest(RequestCallBack callBack) {
-       this.requestCallBack = callBack;
+        this.requestCallBack = callBack;
     }
+
     @Override
     public void makeRequest(int id) {
-        RetrofitInterface retrofit =RetrofitClient.getInstance().create(RetrofitInterface.class);
-        try{
+        RetrofitInterface retrofit = RetrofitClient.getInstance().create(RetrofitInterface.class);
+        try {
             Call<List<ShowRoom>> call = retrofit.getShorooms(id);
             call.enqueue(new Callback<List<ShowRoom>>() {
                 @Override
                 public void onResponse(Call<List<ShowRoom>> call, Response<List<ShowRoom>> response) {
-                    makeCallback(response.body(),requestCallBack);
+                    makeCallback(response.body(), requestCallBack);
                 }
 
                 @Override
@@ -31,7 +33,7 @@ public class DealerRequest extends BaseRequest {
 
                 }
             });
-        }catch (Exception e ){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -44,6 +44,7 @@ public class NetworkDataFragment extends DialogFragment implements NetworkdataFr
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return super.onCreateDialog(savedInstanceState);
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ public class NetworkDataFragment extends DialogFragment implements NetworkdataFr
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         bundle.putSerializable("object", (Serializable) baseNetworkObject);
-        bundle.putString("type",type);
+        bundle.putString("type", type);
         intent.putExtras(bundle);
         getTargetFragment().onActivityResult(111, 1, intent);
         dismiss();

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.blackwallpaper">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,9 +21,9 @@
         </activity>
         <!--<receiver android:name=".presenter.MainFragmentPresenter">-->
 
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.SEND_DATA"/>-->
-            <!--</intent-filter>-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.SEND_DATA"/>-->
+        <!--</intent-filter>-->
         <!--</receiver>-->
     </application>
 

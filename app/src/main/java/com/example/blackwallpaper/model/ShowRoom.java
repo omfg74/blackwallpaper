@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class ShowRoom   implements Serializable {
+public class ShowRoom implements Serializable {
 
     @SerializedName("Id")
     @Expose

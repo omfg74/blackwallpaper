@@ -10,13 +10,12 @@ public class LayoutModel {
     public static final int FNAME_TYPE = 3;
     public static final int SURNAME_TYPE = 4;
     public static final int PHONE_TYPE = 5;
-    public static final int EMAIL_TYPE  = 6;
-    public static final int VIN_TYPE  = 7;
-    public static final int CITY_TYPE  = 8;
-    public static final int DEALER_TYPE  = 9;
-    public static final int YEAR_TYPE  = 10;
-    public static final int CLASS_TYPE  = 11;
-
+    public static final int EMAIL_TYPE = 6;
+    public static final int VIN_TYPE = 7;
+    public static final int CITY_TYPE = 8;
+    public static final int DEALER_TYPE = 9;
+    public static final int YEAR_TYPE = 10;
+    public static final int CLASS_TYPE = 11;
 
 
     public LayoutModel(String title, int type, String data) {

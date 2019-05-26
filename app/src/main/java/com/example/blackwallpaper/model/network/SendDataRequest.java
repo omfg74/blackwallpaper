@@ -13,11 +13,12 @@ import retrofit2.Retrofit;
 public class SendDataRequest {
 
     SendDataCallBackInterface sendDataCallBackInterface;
+
     public SendDataRequest(SendDataCallBackInterface sendDataCallBackInterface) {
         this.sendDataCallBackInterface = sendDataCallBackInterface;
     }
 
-    public void makeRequest(UserInfo userInfo){
+    public void makeRequest(UserInfo userInfo) {
         RetrofitInterface retrofit = RetrofitClient.getInstance().create(RetrofitInterface.class);
         final Call<Void> request = retrofit.sendData(userInfo);
         request.enqueue(new Callback<Void>() {

@@ -3,6 +3,7 @@ package com.example.blackwallpaper.view.adapters;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     City cityObject;
     int yearObject;
     Button mrButton, msButton;
-    int buttonSeleector = 1 ;
+    int buttonSeleector = 1;
     CarClass carClassObject;
     ShowRoom showRoomObject;
     private TextView yearDataTextView,
@@ -147,7 +148,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 msButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        buttonSeleector =  2;
+                        buttonSeleector = 2;
                         msButton.setBackgroundColor(ServiceApplication.getContext().getColor(R.color.colorWhite));
                         msButton.setTextColor(ServiceApplication.getContext().getColor(R.color.colorPrimaryDark));
                         mrButton.setBackgroundColor(ServiceApplication.getContext().getColor(R.color.colorPrimaryDark));
@@ -168,7 +169,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 fnameEditText.setHint(list.get(position).getData());
                 break;
             case PHONE_TYPE:
-               phoneTitleTextView.setText(list.get(position).getTitle());
+                phoneTitleTextView.setText(list.get(position).getTitle());
                 phoneEditText.setHint(list.get(position).getData());
                 break;
             case EMAIL_TYPE:
@@ -176,8 +177,8 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 emailEdittext.setHint(list.get(position).getData());
                 break;
             case VIN_TYPE:
-               vinTitleTextView.setText(list.get(position).getTitle());
-               vinEditText.setHint(list.get(position).getData());
+                vinTitleTextView.setText(list.get(position).getTitle());
+                vinEditText.setHint(list.get(position).getData());
                 break;
             case YEAR_TYPE:
                 yearTitleTextView.setText(list.get(position).getTitle());
@@ -190,7 +191,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 });
                 break;
             case DEALER_TYPE:
-             dealerTitleTextView.setText(list.get(position).getTitle());
+                dealerTitleTextView.setText(list.get(position).getTitle());
                 dealerDataTextView.setText(list.get(position).getData());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -200,8 +201,8 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 });
                 break;
             case CITY_TYPE:
-             cityTitleTextView.setText(list.get(position).getTitle());
-               cityDataTextView.setText(list.get(position).getData());
+                cityTitleTextView.setText(list.get(position).getTitle());
+                cityDataTextView.setText(list.get(position).getData());
                 city = cityDataTextView.getText().toString();
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -231,35 +232,36 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public void setCity(City city) {
         this.cityObject = city;
-        list.set(7, new LayoutModel("City",8,city.getName()));
-        Logger.toLog("city test "+city.getName());
+        list.set(7, new LayoutModel("City", 8, city.getName()));
+        Logger.toLog("city test " + city.getName());
 //        notifyItemPositionChanged();
         notifyDataSetChanged();
     }
 
     public void setDealer(ShowRoom showRoom) {
         this.showRoomObject = showRoom;
-        list.set(8, new LayoutModel(ServiceApplication.getContext().getString(R.string.choose_your_dealer_title),9,showRoom.getName()));
+        list.set(8, new LayoutModel(ServiceApplication.getContext().getString(R.string.dealer), 9, showRoom.getName()));
         Logger.toLog(showRoom.getName());
         notifyDataSetChanged();
     }
 
     public void setYear(int year) {
         this.yearObject = year;
-        list.set(9, new LayoutModel(ServiceApplication.getContext().getString(R.string.choose_year_title),10,String.valueOf(year)));
-        Logger.toLog("Y "+year);
+        list.set(9, new LayoutModel(ServiceApplication.getContext().getString(R.string.choose_year_title), 10, String.valueOf(year)));
+        Logger.toLog("Y " + year);
         notifyDataSetChanged();
     }
 
     public void setClass(CarClass carClass) {
         this.carClassObject = carClass;
-        list.set(10, new LayoutModel(ServiceApplication.getContext().getString(R.string.choose_class),11,carClass.getName()));
+        list.set(10, new LayoutModel(ServiceApplication.getContext().getString(R.string.carClass), 11, carClass.getName()));
         Logger.toLog(carClass.getName());
         notifyDataSetChanged();
     }
 
+
     public UserInfo collectAllData() {
-        if (showRoomObject!=null&carClassObject!=null&cityObject!=null&yearObject!=0) {
+        if (showRoomObject != null & carClassObject != null & cityObject != null & yearObject != 0) {
             DataValidator dataValidator = new DataValidator();
             UserInfo userInfo = new UserInfo();
             userInfo.setGender(buttonSeleector);
@@ -274,14 +276,16 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             userInfo.setYear(yearDataTextView.getText().toString());
             userInfo.setClassId(carClassObject.getId());
             if (dataValidator.check(userInfo)) {
-              return userInfo;
+                saveData(userInfo);
+                return userInfo;
             }
         }
         return null;
     }
 
-    public void saveData() {
-
+    public void saveData(UserInfo userInfo) {
+        DataSaver dataSaver = new DataSaver();
+        dataSaver.saveData(userInfo, cityObject, showRoomObject, carClassObject);
     }
 
     class SwitchViewHolder extends RecyclerView.ViewHolder {

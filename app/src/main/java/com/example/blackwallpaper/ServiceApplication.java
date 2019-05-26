@@ -5,7 +5,7 @@ import android.content.Context;
 
 public class ServiceApplication extends Application {
 
-   private static Context context;
+    private static Context context;
 
     @Override
     public void onCreate() {

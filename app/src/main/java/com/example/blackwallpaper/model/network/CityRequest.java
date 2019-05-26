@@ -12,13 +12,15 @@ import retrofit2.Response;
 
 public class CityRequest extends BaseRequest {
     RequestCallBack requestCallBack;
+
     public CityRequest(RequestCallBack callBack) {
         this.requestCallBack = callBack;
     }
+
     @Override
     public void makeRequest() {
-        RetrofitInterface retrofit =RetrofitClient.getInstance().create(RetrofitInterface.class);
-        try{
+        RetrofitInterface retrofit = RetrofitClient.getInstance().create(RetrofitInterface.class);
+        try {
             Call<List<City>> call = retrofit.getCities();
             call.enqueue(new Callback<List<City>>() {
                 @Override
@@ -31,13 +33,14 @@ public class CityRequest extends BaseRequest {
 
                 }
             });
-        }catch (Exception e ){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public void makeCallback(List list, RequestCallBack requestCallBack) {
-        super.makeCallback(list,requestCallBack);
+        super.makeCallback(list, requestCallBack);
 
     }
 

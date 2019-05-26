@@ -47,7 +47,7 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view =inflater.inflate(R.layout.main_fragment,container,false);
+        view = inflater.inflate(R.layout.main_fragment, container, false);
         return view;
     }
 
@@ -58,6 +58,7 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
         presenter.onViewCreated();
 
     }
+
     @Override
     public void initRecyclerView() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -73,7 +74,7 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
 
     @Override
     public void attachCityFragment() {
-       changeFragment("city");
+        changeFragment("city");
     }
 
 
@@ -84,17 +85,12 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
 
     private void changeFragment(String type, int id) {
         Bundle bundle = new Bundle();
-        bundle.putString(Constants.TYPE,type);
-        bundle.putInt("id",id);
+        bundle.putString(Constants.TYPE, type);
+        bundle.putInt("id", id);
         DialogFragment networkDataFragment = new NetworkDataFragment();
         networkDataFragment.setArguments(bundle);
-        networkDataFragment.setTargetFragment(this,111);
-//        getActivity().getSupportFragmentManager()
-//                .beginTransaction()
-//                .addToBackStack("networkFragment")
-//                .replace(R.id.mainfragmentPlace,networkDataFragment)
-//                .commit();
-        networkDataFragment.show(getFragmentManager(),networkDataFragment.getClass().getName());
+        networkDataFragment.setTargetFragment(this, 111);
+        networkDataFragment.show(getFragmentManager(), networkDataFragment.getClass().getName());
     }
 
     @Override
@@ -109,7 +105,7 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
 
     @Override
     public void makeToast(String s) {
-        Snackbar.make(view,s,Snackbar.LENGTH_LONG).show();
+        Snackbar.make(view, s, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -139,23 +135,25 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     }
 
     @Override
+    public void provideData(City city, ShowRoom showRoom, CarClass carClass) {
+        adapter.setCity(city);
+        adapter.setDealer(showRoom);
+        adapter.setClass(carClass);
+    }
+
+    @Override
     public void onItemClicked(int i, String s) {
-        presenter.onReciclerViewItemClicked(i,s);
+        presenter.onReciclerViewItemClicked(i, s);
     }
 
 
     private void changeFragment(String type) {
         Bundle bundle = new Bundle();
-        bundle.putString("type",type);
+        bundle.putString("type", type);
         DialogFragment networkDataFragment = new NetworkDataFragment();
         networkDataFragment.setArguments(bundle);
-        networkDataFragment.setTargetFragment(this,111);
-//        getActivity().getSupportFragmentManager()
-//                .beginTransaction()
-//                .addToBackStack("networkFragment")
-//                .replace(R.id.mainfragmentPlace,networkDataFragment)
-//                .commit();
-        networkDataFragment.show(getFragmentManager(),networkDataFragment.getClass().getName());
+        networkDataFragment.setTargetFragment(this, 111);
+        networkDataFragment.show(getFragmentManager(), networkDataFragment.getClass().getName());
     }
 
     @Override
@@ -163,7 +161,7 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 111:
-            presenter.onActivityResult(data);
+                presenter.onActivityResult(data);
         }
     }
 
@@ -177,6 +175,6 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        adapter.saveData();
+
     }
 }

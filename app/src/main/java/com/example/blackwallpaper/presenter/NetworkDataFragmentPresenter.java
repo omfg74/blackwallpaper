@@ -17,6 +17,7 @@ public class NetworkDataFragmentPresenter implements NetworkdataFragmentContract
     NetworkdataFragmentContract.Viev viev;
     NetworkdataFragmentContract.Model model;
     BaseRequest request;
+
     public NetworkDataFragmentPresenter(NetworkdataFragmentContract.Viev viev) {
         this.viev = viev;
     }
@@ -29,19 +30,19 @@ public class NetworkDataFragmentPresenter implements NetworkdataFragmentContract
 
     @Override
     public void makeRequest(Bundle bundle) {
-        if (bundle.containsKey(Constants.TYPE)){
-            if(bundle.getString(Constants.TYPE,null).equalsIgnoreCase(Constants.CITY)){
+        if (bundle.containsKey(Constants.TYPE)) {
+            if (bundle.getString(Constants.TYPE, null).equalsIgnoreCase(Constants.CITY)) {
                 request = new CityRequest(this);
                 request.makeRequest();
-            }else if(bundle.getString(Constants.TYPE,null).equalsIgnoreCase(Constants.DEALER)){
+            } else if (bundle.getString(Constants.TYPE, null).equalsIgnoreCase(Constants.DEALER)) {
                 request = new DealerRequest(this);
                 request.makeRequest(bundle.getInt("id"));
-            }else if(bundle.getString(Constants.TYPE,null).equalsIgnoreCase(Constants.CLASS)){
+            } else if (bundle.getString(Constants.TYPE, null).equalsIgnoreCase(Constants.CLASS)) {
                 request = new ClassRequest(this);
                 request.makeRequest();
-            }else if(bundle.getString(Constants.TYPE,null).equalsIgnoreCase(Constants.YEAR)){
+            } else if (bundle.getString(Constants.TYPE, null).equalsIgnoreCase(Constants.YEAR)) {
                 YearListGenerator yearListGenerator = new YearListGenerator();
-                List<Integer>yearList = yearListGenerator.getYearList();
+                List<Integer> yearList = yearListGenerator.getYearList();
                 callback(yearList);
             }
         }
@@ -52,16 +53,14 @@ public class NetworkDataFragmentPresenter implements NetworkdataFragmentContract
     @Override
     public void callback(List list) {
         String type;
-        if (request instanceof CityRequest){
-            type=Constants.CITY;
-        }else
-        if (request instanceof DealerRequest){
-            type=Constants.DEALER;
-        }else
-        if (request instanceof ClassRequest){
-            type=Constants.CLASS;
-        }else {
-            type=Constants.YEAR;
+        if (request instanceof CityRequest) {
+            type = Constants.CITY;
+        } else if (request instanceof DealerRequest) {
+            type = Constants.DEALER;
+        } else if (request instanceof ClassRequest) {
+            type = Constants.CLASS;
+        } else {
+            type = Constants.YEAR;
         }
         viev.placeItamsTorecyclerView(list, type);
     }

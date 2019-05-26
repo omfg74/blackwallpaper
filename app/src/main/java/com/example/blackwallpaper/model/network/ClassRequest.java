@@ -12,15 +12,16 @@ import retrofit2.Response;
 
 public class ClassRequest extends BaseRequest {
     RequestCallBack requestCallBack;
+
     public ClassRequest(RequestCallBack callBack) {
         this.requestCallBack = callBack;
     }
 
     @Override
     public void makeRequest() {
-        RetrofitInterface retrofit =RetrofitClient.getInstance().create(RetrofitInterface.class);
-        try{
-            Call<List<CarClass>>call = retrofit.getClasses();
+        RetrofitInterface retrofit = RetrofitClient.getInstance().create(RetrofitInterface.class);
+        try {
+            Call<List<CarClass>> call = retrofit.getClasses();
             call.enqueue(new Callback<List<CarClass>>() {
                 @Override
                 public void onResponse(Call<List<CarClass>> call, Response<List<CarClass>> response) {
@@ -32,7 +33,7 @@ public class ClassRequest extends BaseRequest {
 
                 }
             });
-        }catch (Exception e ){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -43,7 +44,7 @@ public class ClassRequest extends BaseRequest {
 
     @Override
     public void makeCallback(List list, RequestCallBack requestCallBack) {
-        super.makeCallback(list,requestCallBack);
+        super.makeCallback(list, requestCallBack);
 
     }
 }

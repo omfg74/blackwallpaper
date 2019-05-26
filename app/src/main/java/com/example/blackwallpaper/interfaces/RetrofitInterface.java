@@ -21,9 +21,10 @@ import retrofit2.http.Query;
 public interface RetrofitInterface {
     @FormUrlEncoded
     @POST(".")
-    Call<AuthObject>getAuthToken(@Header("Authorization") String s,
-                              @Field("grant_type") String q,
-                              @Field("scope") String scope);
+    Call<AuthObject> getAuthToken(@Header("Authorization") String s,
+                                  @Field("grant_type") String q,
+                                  @Field("scope") String scope);
+
     @GET("Classes")
     Call<List<CarClass>> getClasses();
 

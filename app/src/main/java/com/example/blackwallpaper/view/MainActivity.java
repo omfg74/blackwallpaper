@@ -23,10 +23,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View {
 
 
-
     TextView doneTextView;
     ImageView rightArrowImageView, leftArrowImageView;
     MainActivityContract.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         MainFragment mainFragment = new MainFragment();
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.mainfragmentPlace,mainFragment)
+                .replace(R.id.mainfragmentPlace, mainFragment)
                 .commit();
     }
 }
