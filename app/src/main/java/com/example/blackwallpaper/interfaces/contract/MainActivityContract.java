@@ -6,6 +6,7 @@ public interface MainActivityContract {
     }
     interface Presenter{
         void onCreate();
+        void onDoneClicked();
     }
     interface Model{
 

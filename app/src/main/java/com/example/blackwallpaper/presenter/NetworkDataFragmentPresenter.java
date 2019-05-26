@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.example.blackwallpaper.interfaces.RequestCallBack;
 import com.example.blackwallpaper.interfaces.contract.NetworkdataFragmentContract;
+import com.example.blackwallpaper.model.Constants;
 import com.example.blackwallpaper.model.network.BaseRequest;
 import com.example.blackwallpaper.model.YearListGenerator;
 import com.example.blackwallpaper.model.network.CityRequest;
@@ -28,17 +29,17 @@ public class NetworkDataFragmentPresenter implements NetworkdataFragmentContract
 
     @Override
     public void makeRequest(Bundle bundle) {
-        if (bundle.containsKey("type")){
-            if(bundle.getString("type",null).equalsIgnoreCase("city")){
+        if (bundle.containsKey(Constants.TYPE)){
+            if(bundle.getString(Constants.TYPE,null).equalsIgnoreCase(Constants.CITY)){
                 request = new CityRequest(this);
                 request.makeRequest();
-            }else if(bundle.getString("type",null).equalsIgnoreCase("dealer")){
+            }else if(bundle.getString(Constants.TYPE,null).equalsIgnoreCase(Constants.DEALER)){
                 request = new DealerRequest(this);
                 request.makeRequest(bundle.getInt("id"));
-            }else if(bundle.getString("type",null).equalsIgnoreCase("class")){
+            }else if(bundle.getString(Constants.TYPE,null).equalsIgnoreCase(Constants.CLASS)){
                 request = new ClassRequest(this);
                 request.makeRequest();
-            }else if(bundle.getString("type",null).equalsIgnoreCase("year")){
+            }else if(bundle.getString(Constants.TYPE,null).equalsIgnoreCase(Constants.YEAR)){
                 YearListGenerator yearListGenerator = new YearListGenerator();
                 List<Integer>yearList = yearListGenerator.getYearList();
                 callback(yearList);
@@ -52,20 +53,16 @@ public class NetworkDataFragmentPresenter implements NetworkdataFragmentContract
     public void callback(List list) {
         String type;
         if (request instanceof CityRequest){
-            type="city";
-            viev.placeItamsTorecyclerView(list, type);
+            type=Constants.CITY;
         }else
         if (request instanceof DealerRequest){
-            type="dealer";
-            viev.placeItamsTorecyclerView(list, type);
+            type=Constants.DEALER;
         }else
         if (request instanceof ClassRequest){
-            type="class";
-            viev.placeItamsTorecyclerView(list, type);
+            type=Constants.CLASS;
         }else {
-            type="year";
-            viev.placeItamsTorecyclerView(list, type);
+            type=Constants.YEAR;
         }
-
+        viev.placeItamsTorecyclerView(list, type);
     }
 }

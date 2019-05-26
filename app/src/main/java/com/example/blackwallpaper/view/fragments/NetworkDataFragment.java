@@ -1,5 +1,6 @@
 package com.example.blackwallpaper.view.fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,24 +9,23 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.blackwallpaper.FromNetworkCallBack;
+import com.example.blackwallpaper.interfaces.FromNetworkCallBack;
 import com.example.blackwallpaper.Logger;
 import com.example.blackwallpaper.R;
 import com.example.blackwallpaper.interfaces.contract.NetworkdataFragmentContract;
-import com.example.blackwallpaper.model.CarClass;
 import com.example.blackwallpaper.model.City;
-import com.example.blackwallpaper.model.ShowRoom;
 import com.example.blackwallpaper.presenter.NetworkDataFragmentPresenter;
 import com.example.blackwallpaper.view.adapters.NetworkFragmentrecyclerViewAdapter;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class NetworkDataFragment extends Fragment implements NetworkdataFragmentContract.Viev, FromNetworkCallBack {
+public class NetworkDataFragment extends DialogFragment implements NetworkdataFragmentContract.Viev, FromNetworkCallBack {
 
     NetworkdataFragmentContract.Presenter presenter;
     RecyclerView netRecyclerView;
@@ -38,6 +38,11 @@ public class NetworkDataFragment extends Fragment implements NetworkdataFragment
 
     }
 
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        return super.onCreateDialog(savedInstanceState);
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -80,6 +85,6 @@ public class NetworkDataFragment extends Fragment implements NetworkdataFragment
         bundle.putString("type",type);
         intent.putExtras(bundle);
         getTargetFragment().onActivityResult(111, 1, intent);
-        getFragmentManager().popBackStack();
+        dismiss();
     }
 }

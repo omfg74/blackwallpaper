@@ -1,4 +1,4 @@
-package com.example.blackwallpaper;
+package com.example.blackwallpaper.interfaces;
 
 import com.example.blackwallpaper.model.BaseNetworkObject;
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,8 +19,10 @@ import com.example.blackwallpaper.interfaces.CallFromAdapterInterface;
 import com.example.blackwallpaper.interfaces.contract.MainFragmentyContract;
 import com.example.blackwallpaper.model.CarClass;
 import com.example.blackwallpaper.model.City;
+import com.example.blackwallpaper.model.Constants;
 import com.example.blackwallpaper.model.LayoutModel;
 import com.example.blackwallpaper.model.ShowRoom;
+import com.example.blackwallpaper.model.UserInfo;
 import com.example.blackwallpaper.presenter.MainFragmentPresenter;
 import com.example.blackwallpaper.view.adapters.MainRecyclerViewAdapter;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,10 +34,12 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     MainRecyclerViewAdapter adapter;
     MainFragmentyContract.Presenter presenter;
     View view;
+    LinearLayoutManager linearLayoutManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         presenter = new MainFragmentPresenter(this);
         presenter.onCreate();
     }
@@ -55,13 +60,15 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     }
     @Override
     public void initRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void fillRecyclerView(List<LayoutModel> layoutModels) {
         adapter = new MainRecyclerViewAdapter(layoutModels, this);
-        recyclerView.setAdapter(adapter);
+
     }
 
     @Override
@@ -71,8 +78,23 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
 
 
     @Override
-    public void attachDealerFragment() {
-        changeFragment("dealer");
+    public void attachDealerFragment(int id) {
+        changeFragment("dealer", id);
+    }
+
+    private void changeFragment(String type, int id) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.TYPE,type);
+        bundle.putInt("id",id);
+        DialogFragment networkDataFragment = new NetworkDataFragment();
+        networkDataFragment.setArguments(bundle);
+        networkDataFragment.setTargetFragment(this,111);
+//        getActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .addToBackStack("networkFragment")
+//                .replace(R.id.mainfragmentPlace,networkDataFragment)
+//                .commit();
+        networkDataFragment.show(getFragmentManager(),networkDataFragment.getClass().getName());
     }
 
     @Override
@@ -111,20 +133,29 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     }
 
     @Override
+    public UserInfo fetchData() {
+
+        return adapter.collectAllData();
+    }
+
+    @Override
     public void onItemClicked(int i, String s) {
         presenter.onReciclerViewItemClicked(i,s);
     }
+
+
     private void changeFragment(String type) {
         Bundle bundle = new Bundle();
         bundle.putString("type",type);
-        NetworkDataFragment networkDataFragment = new NetworkDataFragment();
+        DialogFragment networkDataFragment = new NetworkDataFragment();
         networkDataFragment.setArguments(bundle);
         networkDataFragment.setTargetFragment(this,111);
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .addToBackStack("networkFragment")
-                .replace(R.id.mainfragmentPlace,networkDataFragment)
-                .commit();
+//        getActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .addToBackStack("networkFragment")
+//                .replace(R.id.mainfragmentPlace,networkDataFragment)
+//                .commit();
+        networkDataFragment.show(getFragmentManager(),networkDataFragment.getClass().getName());
     }
 
     @Override
@@ -134,5 +165,18 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
             case 111:
             presenter.onActivityResult(data);
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        presenter.onDetach();
+    }
+
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        adapter.saveData();
     }
 }

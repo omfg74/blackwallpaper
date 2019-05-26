@@ -4,12 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 <TextView
-    android:background="@color/colorAccent"
-    android:textColor="@color/colorWhite"
-    android:id="@+id/networkDataTextView"
+    android:textSize="22dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:id="@+id/networkDataTextView"
+    android:text="@string/name"
+    android:gravity="left"
     android:layout_gravity="center_vertical|left"
     android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
     />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+

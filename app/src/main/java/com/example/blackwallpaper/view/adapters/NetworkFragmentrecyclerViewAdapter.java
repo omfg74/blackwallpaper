@@ -8,12 +8,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.blackwallpaper.FromNetworkCallBack;
+import com.example.blackwallpaper.interfaces.FromNetworkCallBack;
 import com.example.blackwallpaper.Logger;
 import com.example.blackwallpaper.R;
-import com.example.blackwallpaper.interfaces.CallFromAdapterInterface;
 import com.example.blackwallpaper.model.CarClass;
 import com.example.blackwallpaper.model.City;
+import com.example.blackwallpaper.model.Constants;
 import com.example.blackwallpaper.model.ShowRoom;
 
 import java.util.List;
@@ -50,8 +50,8 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
                 public void onClick(View v) {
                     City city = new City();
                     city.setId(cityList.get(position).getId());
-                    cityList.get(position).getName();
-                    callFromAdapterInterface.callBack(city, "city");
+                    city.setName(cityList.get(position).getName());
+                    callFromAdapterInterface.callBack(city, Constants.CITY);
                 }
             });
 
@@ -64,7 +64,7 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
                     showRoom.setCityId(showRoomList.get(position).getCityId());
                     showRoom.setId(showRoomList.get(position).getId());
                     showRoom.setName(showRoomList.get(position).getName());
-                    callFromAdapterInterface.callBack(showRoom, "dealer");
+                    callFromAdapterInterface.callBack(showRoom, Constants.DEALER);
                 }
             });
         }else if (yearList!=null){
@@ -73,7 +73,7 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callFromAdapterInterface.callBack(yearList.get(position),"year");
+                    callFromAdapterInterface.callBack(yearList.get(position),Constants.YEAR);
                 }
             });
         }else if(carClassList!=null){
@@ -85,7 +85,7 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
                     CarClass carClass = new CarClass();
                     carClass.setId(carClassList.get(position).getId());
                     carClass.setName(carClassList.get(position).getName());
-                    callFromAdapterInterface.callBack(carClass, "class");
+                    callFromAdapterInterface.callBack(carClass, Constants.CLASS);
                 }
             });
         }
@@ -104,24 +104,6 @@ public class NetworkFragmentrecyclerViewAdapter extends RecyclerView.Adapter<Net
         }
       return 0;
     }
-//    public void appendCityData(List list){
-//        this.cityList = (List<City>) list;
-//        notifyDataSetChanged();
-//
-//    }
-//    public void appendShowRoomData(List list){
-//        this.showRoomList = (List<ShowRoom>)list;
-//        notifyDataSetChanged();
-//    }
-//    public void appendYearData(List list){
-//        Logger.toLog("year size "+list.size());
-//        this.yearList = (List<Integer>)list;
-//        notifyDataSetChanged();
-//    }
-//    public void updateCarClassData(List list){
-//        this.carClassList = (List<CarClass>)list;
-//        notifyDataSetChanged();
-//    }
 
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;

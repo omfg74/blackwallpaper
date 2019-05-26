@@ -3,6 +3,7 @@ package com.example.blackwallpaper.model;
 public class LayoutModel {
     private String title;
     private int type;
+    private String data;
 
     public static final int SWITCH_TYPE = 1;
     public static final int NAME_TYPE = 2;
@@ -18,9 +19,10 @@ public class LayoutModel {
 
 
 
-    public LayoutModel(String title, int type) {
+    public LayoutModel(String title, int type, String data) {
         this.title = title;
         this.type = type;
+        this.data = data;
     }
 
     public String getTitle() {
@@ -38,5 +40,13 @@ public class LayoutModel {
 
     public int getType() {
         return type;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

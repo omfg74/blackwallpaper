@@ -6,6 +6,7 @@ import com.example.blackwallpaper.model.CarClass;
 import com.example.blackwallpaper.model.City;
 import com.example.blackwallpaper.model.LayoutModel;
 import com.example.blackwallpaper.model.ShowRoom;
+import com.example.blackwallpaper.model.UserInfo;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface MainFragmentyContract {
         void initRecyclerView();
         void fillRecyclerView(List<LayoutModel>layoutModels);
         void attachCityFragment();
-        void attachDealerFragment();
+        void attachDealerFragment(int id);
         void attachYearFragment();
         void attachClassFragment();
         void makeToast(String s);
@@ -22,6 +23,7 @@ public interface MainFragmentyContract {
         void setDealerText(ShowRoom showRoom);
         void setYearText(int year);
         void setClassText(CarClass carClass);
+        UserInfo fetchData();
     }
     interface Model{
         List<LayoutModel> laoytmodels();
@@ -32,5 +34,6 @@ public interface MainFragmentyContract {
         void onReciclerViewItemClicked(int i, String s);
         void onViewCreated();
         void onActivityResult(Intent data);
+        void onDetach();
     }
 }
