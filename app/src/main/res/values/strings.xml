@@ -27,4 +27,5 @@
     <string name="carClass">Класс</string>
     <string name="fill_all">Заполните все поля</string>
     <string name="enter_correct_email">Введите корректный Email</string>
+    <string name="enter_correct_vin">введен не коррктный вин</string>
 </resources>

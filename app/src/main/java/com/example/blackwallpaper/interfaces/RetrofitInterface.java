@@ -4,6 +4,7 @@ import com.example.blackwallpaper.model.AuthObject;
 import com.example.blackwallpaper.model.CarClass;
 import com.example.blackwallpaper.model.City;
 import com.example.blackwallpaper.model.ShowRoom;
+import com.example.blackwallpaper.model.UserInfo;
 
 import java.util.List;
 
@@ -31,4 +32,7 @@ public interface RetrofitInterface {
 
     @GET("showrooms")
     Call<List<ShowRoom>> getShorooms(@Query("cityid") int cityId);
+
+    @POST("WorkSheets")
+    Call<Void> sendData(@Body UserInfo userInfo);
 }

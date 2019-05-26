@@ -10,20 +10,22 @@ import android.util.Log;
 import com.example.blackwallpaper.Logger;
 import com.example.blackwallpaper.R;
 import com.example.blackwallpaper.ServiceApplication;
+import com.example.blackwallpaper.interfaces.SendDataCallBackInterface;
 import com.example.blackwallpaper.model.CarClass;
 import com.example.blackwallpaper.model.City;
 import com.example.blackwallpaper.model.Constants;
 import com.example.blackwallpaper.model.ShowRoom;
 import com.example.blackwallpaper.model.UserInfo;
+import com.example.blackwallpaper.model.network.SendDataRequest;
 import com.example.blackwallpaper.model.reposytory.ModelProvider;
 import com.example.blackwallpaper.interfaces.contract.MainFragmentyContract;
 import com.example.blackwallpaper.model.LayoutModel;
+import com.example.blackwallpaper.utils.DataSaver;
 import com.example.blackwallpaper.utils.EmailChecker;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-public class MainFragmentPresenter extends BroadcastReceiver implements MainFragmentyContract.Presenter {
+public class MainFragmentPresenter extends BroadcastReceiver implements MainFragmentyContract.Presenter, SendDataCallBackInterface {
     MainFragmentyContract.View view;
     MainFragmentyContract.Model layoutProvider;
     List<LayoutModel>layoutModels;
@@ -125,7 +127,13 @@ public class MainFragmentPresenter extends BroadcastReceiver implements MainFrag
         if (userInfo!=null){
             EmailChecker emailChecker =new EmailChecker();
             if (emailChecker.check(userInfo.getEmail())){
-               //todo send request
+                if(userInfo.getVin().toCharArray().length==17){
+                    Logger.toLog("DEALER ID "+String.valueOf(userInfo.getShowRoomId()));
+                    SendDataRequest sendDataRequest = new SendDataRequest(this);
+                    sendDataRequest.makeRequest(userInfo);
+                }else {
+                    view.makeToast(ServiceApplication.getContext().getString(R.string.enter_correct_vin));
+                }
             }else {
                view.makeToast(ServiceApplication.getContext().getString(R.string.enter_correct_email));
             }
@@ -134,4 +142,8 @@ public class MainFragmentPresenter extends BroadcastReceiver implements MainFrag
         }
     }
 
+    @Override
+    public void Callback(String s) {
+        view.makeToast(s);
+    }
 }

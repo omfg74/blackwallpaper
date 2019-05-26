@@ -1,6 +1,7 @@
 package com.example.blackwallpaper.model;
 
 public class UserInfo {
+    private int gender;
     private String lastName;
     private String firstName;
     private String middleName;
@@ -10,7 +11,15 @@ public class UserInfo {
     private String year;
     private String city;
     private int classId;
-    private int dealerId;
+    private int showRoomId;
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
 
     public void setCity(String city) {
         this.city = city;
@@ -52,8 +61,8 @@ public class UserInfo {
         return classId;
     }
 
-    public int getDealerId() {
-        return dealerId;
+    public int getShowRoomId() {
+        return showRoomId;
     }
 
     public void setLastName(String lastName) {
@@ -88,7 +97,7 @@ public class UserInfo {
         this.classId = classId;
     }
 
-    public void setDealerId(int dealerId) {
-        this.dealerId = dealerId;
+    public void setShowRoomId(int showRoomId) {
+        this.showRoomId = showRoomId;
     }
 }

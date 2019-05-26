@@ -30,7 +30,7 @@ public class DataValidator {
         if (userInfo.getClassId()==0){
             return false;
         }
-        if (userInfo.getDealerId()==0){
+        if (userInfo.getShowRoomId()==0){
             return false;
         }
         if (userInfo.getCity().equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.choose_your_city_title))){

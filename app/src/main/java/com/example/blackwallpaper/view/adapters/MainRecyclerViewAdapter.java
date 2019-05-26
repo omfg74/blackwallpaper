@@ -3,7 +3,6 @@ package com.example.blackwallpaper.view.adapters;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +21,6 @@ import com.example.blackwallpaper.model.ShowRoom;
 import com.example.blackwallpaper.model.UserInfo;
 import com.example.blackwallpaper.utils.DataSaver;
 import com.example.blackwallpaper.utils.DataValidator;
-import com.example.blackwallpaper.utils.EmailChecker;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -47,7 +44,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     City cityObject;
     int yearObject;
     Button mrButton, msButton;
-    String buttonSeleector = ServiceApplication.getContext().getString(R.string.mr) ;
+    int buttonSeleector = 1 ;
     CarClass carClassObject;
     ShowRoom showRoomObject;
     private TextView yearDataTextView,
@@ -139,7 +136,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 mrButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        buttonSeleector = ServiceApplication.getContext().getString(R.string.mr);
+                        buttonSeleector = 1;
                         mrButton.setBackgroundColor(ServiceApplication.getContext().getColor(R.color.colorWhite));
                         mrButton.setTextColor(ServiceApplication.getContext().getColor(R.color.colorPrimaryDark));
                         msButton.setBackgroundColor(ServiceApplication.getContext().getColor(R.color.colorPrimaryDark));
@@ -150,7 +147,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 msButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        buttonSeleector = ServiceApplication.getContext().getString(R.string.ms);
+                        buttonSeleector =  2;
                         msButton.setBackgroundColor(ServiceApplication.getContext().getColor(R.color.colorWhite));
                         msButton.setTextColor(ServiceApplication.getContext().getColor(R.color.colorPrimaryDark));
                         mrButton.setBackgroundColor(ServiceApplication.getContext().getColor(R.color.colorPrimaryDark));
@@ -265,14 +262,15 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (showRoomObject!=null&carClassObject!=null&cityObject!=null&yearObject!=0) {
             DataValidator dataValidator = new DataValidator();
             UserInfo userInfo = new UserInfo();
-            userInfo.setLastName(buttonSeleector + " " + surnameEditText.getText().toString());
+            userInfo.setGender(buttonSeleector);
+            userInfo.setLastName(surnameEditText.getText().toString());
             userInfo.setFirstName(nameEditText.getText().toString());
             userInfo.setMiddleName(fnameEditText.getText().toString());
             userInfo.setPhone(phoneEditText.getText().toString());
             userInfo.setEmail(emailEdittext.getText().toString());
             userInfo.setVin(vinEditText.getText().toString());
             userInfo.setCity(cityDataTextView.getText().toString());
-            userInfo.setDealerId(showRoomObject.getId());
+            userInfo.setShowRoomId(showRoomObject.getId());
             userInfo.setYear(yearDataTextView.getText().toString());
             userInfo.setClassId(carClassObject.getId());
             if (dataValidator.check(userInfo)) {

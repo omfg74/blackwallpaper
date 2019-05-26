@@ -105,9 +105,9 @@ public class RetrofitClient {
     private static Retrofit getAdapterAuth() {
         Retrofit retrofit;
             OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-            httpClient.addInterceptor(addInterceptor());
+//            httpClient.addInterceptor(addInterceptor());
             if (BuildConfig.DEBUG) {
-                httpClient.addInterceptor(addInterceptor());
+//                httpClient.addInterceptor(addInterceptor());
             }
 
         retrofit= new Retrofit.Builder()
