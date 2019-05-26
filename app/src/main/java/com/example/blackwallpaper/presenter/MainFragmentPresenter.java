@@ -18,6 +18,8 @@ import com.example.blackwallpaper.model.UserInfo;
 import com.example.blackwallpaper.model.reposytory.ModelProvider;
 import com.example.blackwallpaper.interfaces.contract.MainFragmentyContract;
 import com.example.blackwallpaper.model.LayoutModel;
+import com.example.blackwallpaper.utils.EmailChecker;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -121,11 +123,15 @@ public class MainFragmentPresenter extends BroadcastReceiver implements MainFrag
       Logger.toLog("intent "+intent);
         UserInfo userInfo = view.fetchData();
         if (userInfo!=null){
-            
+            EmailChecker emailChecker =new EmailChecker();
+            if (emailChecker.check(userInfo.getEmail())){
+               //todo send request
+            }else {
+               view.makeToast(ServiceApplication.getContext().getString(R.string.enter_correct_email));
+            }
         }else {
             view.makeToast(ServiceApplication.getContext().getString(R.string.fill_all));
         }
-        Logger.toLog("user info "+userInfo);
     }
 
 }

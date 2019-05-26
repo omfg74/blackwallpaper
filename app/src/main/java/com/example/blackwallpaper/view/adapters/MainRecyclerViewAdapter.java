@@ -22,6 +22,8 @@ import com.example.blackwallpaper.model.ShowRoom;
 import com.example.blackwallpaper.model.UserInfo;
 import com.example.blackwallpaper.utils.DataSaver;
 import com.example.blackwallpaper.utils.DataValidator;
+import com.example.blackwallpaper.utils.EmailChecker;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -274,7 +276,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             userInfo.setYear(yearDataTextView.getText().toString());
             userInfo.setClassId(carClassObject.getId());
             if (dataValidator.check(userInfo)) {
-                return userInfo;
+              return userInfo;
             }
         }
         return null;

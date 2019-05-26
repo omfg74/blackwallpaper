@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.blackwallpaper.ServiceApplication;
 import com.example.blackwallpaper.interfaces.FromNetworkCallBack;
 import com.example.blackwallpaper.Logger;
 import com.example.blackwallpaper.R;
@@ -46,6 +47,7 @@ public class NetworkDataFragment extends DialogFragment implements NetworkdataFr
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.network_data_fragment, container, false);
         return view;
 //        return super.onCreateView(inflater, container, savedInstanceState);
@@ -65,15 +67,20 @@ public class NetworkDataFragment extends DialogFragment implements NetworkdataFr
         Logger.toLog("Type " + type + " " + "List " + list.size());
         if (type.equalsIgnoreCase("city")) {
             List<City> cities = list;
+            getDialog().setTitle(ServiceApplication.getContext().getString(R.string.choose_your_city_title));
             adapter = new NetworkFragmentrecyclerViewAdapter(this, cities, null, null, null);
         } else if (type.equalsIgnoreCase("class")) {
+            getDialog().setTitle(ServiceApplication.getContext().getString(R.string.choose_class));
             adapter = new NetworkFragmentrecyclerViewAdapter(this, null, null, null, list);
         } else if (type.equalsIgnoreCase("dealer")) {
+            getDialog().setTitle(ServiceApplication.getContext().getString(R.string.choose_your_dealer_title));
             adapter = new NetworkFragmentrecyclerViewAdapter(this, null, list, null, null);
         } else if (type.equalsIgnoreCase("year")) {
+            getDialog().setTitle(ServiceApplication.getContext().getString(R.string.choose_year_title));
             adapter = new NetworkFragmentrecyclerViewAdapter(this, null, null, list, null);
         }
         netRecyclerView.setAdapter(adapter);
+
     }
 
 
