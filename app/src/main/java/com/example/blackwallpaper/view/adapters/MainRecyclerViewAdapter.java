@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,12 @@ import com.example.blackwallpaper.utils.DataSaver;
 import com.example.blackwallpaper.utils.DataValidator;
 
 import java.util.List;
+
+import ru.tinkoff.decoro.MaskImpl;
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser;
+import ru.tinkoff.decoro.slots.Slot;
+import ru.tinkoff.decoro.watchers.FormatWatcher;
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
 
 import static com.example.blackwallpaper.model.LayoutModel.CITY_TYPE;
 import static com.example.blackwallpaper.model.LayoutModel.CLASS_TYPE;
@@ -181,9 +188,11 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 break;
             case PHONE_TYPE:
                 phoneTitleTextView.setText(list.get(position).getTitle());
-                if (list.get(position).getData().equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.enter_your_phone_number))){
-                phoneEditText.setHint(list.get(position).getData());}else{
-                phoneEditText.setHint(list.get(position).getData());}
+//                if (list.get(position).getData().equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.enter_your_phone_number))){
+                if (list.get(position).getData().equalsIgnoreCase("+7")){
+                phoneEditText.setHint(list.get(position).getData());
+                }else{
+                phoneEditText.setText(list.get(position).getData());}
                 break;
             case EMAIL_TYPE:
                 emailTitleTextView.setText(list.get(position).getTitle());
@@ -370,6 +379,10 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             phoneTitleTextView.setTextColor(ServiceApplication.getContext().getColor(R.color.colorWhite));
             phoneEditText.setTextColor(ServiceApplication.getContext().getColor(R.color.colorWhite));
             phoneEditText.setHintTextColor(ServiceApplication.getContext().getColor(R.color.colorGray));
+            Slot[] slots = new UnderscoreDigitSlotsParser().parseSlots("+7 (___) ___-__-__");
+            FormatWatcher formatWatcher = new MaskFormatWatcher(MaskImpl.createTerminated(slots));
+            formatWatcher.installOn(phoneEditText);
+//            phoneEditText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(16) });
 
         }
     }
