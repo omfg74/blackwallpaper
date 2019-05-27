@@ -89,12 +89,6 @@ public class MainFragmentPresenter extends BroadcastReceiver implements MainFrag
     }
 
     @Override
-    public void provideDataSet() {
-        Log.d("Log ", "Model size" + layoutModels.size());
-
-    }
-
-    @Override
     public void onReciclerViewItemClicked(int i, String s) {
         Log.d("Log ", "number " + i + " " + s);
         switch (i) {
@@ -124,7 +118,6 @@ public class MainFragmentPresenter extends BroadcastReceiver implements MainFrag
     @Override
     public void onViewCreated() {
         view.initRecyclerView();
-        provideDataSet();
     }
 
     @Override
@@ -156,6 +149,10 @@ public class MainFragmentPresenter extends BroadcastReceiver implements MainFrag
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onResume() {
     }
 
     @Override

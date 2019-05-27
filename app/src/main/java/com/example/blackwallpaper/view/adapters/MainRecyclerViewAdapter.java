@@ -158,27 +158,44 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 break;
             case SURNAME_TYPE:
                 surnameTitleTextView.setText(list.get(position).getTitle());
+                if (list.get(position).getData().equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.text_field_enter_your_surname))){
                 surnameEditText.setHint(list.get(position).getData());
+                }else {
+                    surnameEditText.setText(list.get(position).getData());
+                }
                 break;
             case NAME_TYPE:
                 nameTitleTextView.setText(list.get(position).getTitle());
+                if (list.get(position).getData().equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.text_field_enter_your_name))){
                 nameEditText.setHint(list.get(position).getData());
+                }else {
+                    nameEditText.setText(list.get(position).getData());
+                }
                 break;
             case FNAME_TYPE:
                 fnameTitleTextView.setText(list.get(position).getTitle());
-                fnameEditText.setHint(list.get(position).getData());
+                if (list.get(position).getData().equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.text_field_enter_your_fname))){
+                fnameEditText.setHint(list.get(position).getData());}else {
+                fnameEditText.setText(list.get(position).getData());}
                 break;
             case PHONE_TYPE:
                 phoneTitleTextView.setText(list.get(position).getTitle());
-                phoneEditText.setHint(list.get(position).getData());
+                if (list.get(position).getData().equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.enter_your_phone_number))){
+                phoneEditText.setHint(list.get(position).getData());}else{
+                phoneEditText.setHint(list.get(position).getData());}
                 break;
             case EMAIL_TYPE:
                 emailTitleTextView.setText(list.get(position).getTitle());
-                emailEdittext.setHint(list.get(position).getData());
+                if (list.get(position).getData().equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.text_field_enter_your_email))){
+                emailEdittext.setHint(list.get(position).getData());}else {
+                emailEdittext.setText(list.get(position).getData());
+                }
                 break;
             case VIN_TYPE:
                 vinTitleTextView.setText(list.get(position).getTitle());
-                vinEditText.setHint(list.get(position).getData());
+                if (list.get(position).getData().equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.text_field_enter_your_vin))){
+                vinEditText.setHint(list.get(position).getData());}else{
+                vinEditText.setText(list.get(position).getData());}
                 break;
             case YEAR_TYPE:
                 yearTitleTextView.setText(list.get(position).getTitle());

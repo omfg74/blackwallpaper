@@ -135,13 +135,6 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     }
 
     @Override
-    public void provideData(City city, ShowRoom showRoom, CarClass carClass) {
-        adapter.setCity(city);
-        adapter.setDealer(showRoom);
-        adapter.setClass(carClass);
-    }
-
-    @Override
     public void onItemClicked(int i, String s) {
         presenter.onReciclerViewItemClicked(i, s);
     }
@@ -176,5 +169,11 @@ public class MainFragment extends Fragment implements MainFragmentyContract.View
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
     }
 }

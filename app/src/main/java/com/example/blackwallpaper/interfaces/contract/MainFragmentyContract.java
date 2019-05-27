@@ -35,8 +35,6 @@ public interface MainFragmentyContract {
         void setClassText(CarClass carClass);
 
         UserInfo fetchData();
-
-        void provideData(City city, ShowRoom showRoom, CarClass carClass);
     }
 
     interface Model {
@@ -46,8 +44,6 @@ public interface MainFragmentyContract {
     interface Presenter {
         void onCreate();
 
-        void provideDataSet();
-
         void onReciclerViewItemClicked(int i, String s);
 
         void onViewCreated();
@@ -55,5 +51,7 @@ public interface MainFragmentyContract {
         void onActivityResult(Intent data);
 
         void onDetach();
+
+        void onResume();
     }
 }
