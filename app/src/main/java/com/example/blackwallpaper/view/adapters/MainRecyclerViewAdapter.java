@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -399,6 +400,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             vinTitleTextView.setTextColor(ServiceApplication.getContext().getColor(R.color.colorWhite));
             vinEditText.setTextColor(ServiceApplication.getContext().getColor(R.color.colorWhite));
             vinEditText.setHintTextColor(ServiceApplication.getContext().getColor(R.color.colorGray));
+            vinEditText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(17) });
 //            vinEditText.setText(ServiceApplication.getContext().getString(R.string.text_field_enter_your_vin));
         }
     }

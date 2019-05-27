@@ -98,7 +98,7 @@ public class MainFragmentPresenter extends BroadcastReceiver implements MainFrag
             case 8:
 
                 if (s.equalsIgnoreCase(ServiceApplication.getContext().getString(R.string.choose_your_city_title))) {
-                    view.makeToast("Please select city first");
+                    view.makeToast("Пожалуйста сначала выберите город  ");
                 } else {
                     if (this.city != null) {
                         view.attachDealerFragment(city.getId());
